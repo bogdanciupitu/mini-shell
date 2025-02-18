@@ -14,15 +14,11 @@ A shell is a command-line interpreter that provides a text-based user interface 
 Bash is both an interactive command language and a scripting language.
 It is used to interact with the file system, applications, operating system and more.
 
-For this assignment you will build a Bash-like shell with minimal functionalities like traversing the file system, running applications, redirecting their output or piping the output from one application into the input of another.
-The details of the functionalities that must be implemented will be further explained.
-
 ### Shell Functionalities
 
 #### Changing the Current Directory
 
 The shell will support a built-in command for navigating the file system, called `cd`.
-To implement this feature you will need to store the current directory path because the user can provide either relative or absolute paths as arguments to the `cd` command.
 
 The built-in `pwd` command will show the current directory path.
 
@@ -40,9 +36,6 @@ no such file or directory
 > pwd
 /usr/lib
 ```
-
-> **_NOTE:_** Using the `cd` command without any arguments or with more than one argument doesn't affect the current directory path.
-> Make sure this edge case is handled in a way that prevents crashes.
 
 #### Closing the Shell
 
@@ -70,7 +63,6 @@ Each application will run in a separate child process of the minishell created u
 
 #### Environment Variables
 
-Your shell will support using environment variables.
 The environment variables will be initially inherited from the `bash` process that started your minishell application.
 
 If an undefined variable is used, its value is the empty string: `""`.
@@ -121,8 +113,6 @@ Hello
 
 With the `|` operator you can chain multiple commands so that the standard output of the first command is redirected to the standard input of the second command.
 
-Hint: Look into [anonymous pipes](https://man7.org/linux/man-pages/man2/pipe.2.html) and file descriptor inheritance while using [fork](https://man7.org/linux/man-pages/man2/fork.2.html).
-
 ```sh
 > echo "Bye"                      # command outputs "Bye"
 Bye
@@ -170,7 +160,7 @@ The lower the number, the **higher** the priority:
 
 #### I/O Redirection
 
-The shell must support the following redirection options:
+The shell support the following redirection options:
 
 - `< filename` - redirects `filename` to standard input
 - `> filename` - redirects standard output to `filename`
@@ -179,18 +169,15 @@ The shell must support the following redirection options:
 - `>> filename` - redirects standard output to `filename` in append mode
 - `2>> filename` - redirects standard error to `filename` in append mode
 
-Hint: Look into [open](https://man7.org/linux/man-pages/man2/open.2.html), [dup2](https://man7.org/linux/man-pages/man2/dup.2.html) and [close](https://man7.org/linux/man-pages/man2/close.2.html).
 
 ## Support Code
 
 The support code consists of three directories:
 
 - `src/` is the skeleton mini-shell implementation.
-  You will have to implement missing parts marked as `TODO` items.
 
 - `util/` stores a parser to be used as support code for implementing the assignment.
   For more information, you can check the `util/parser/README.md` file.
-  You can use this parser or write your own.
 
 - `tests/` are tests used to validate (and grade) the assignment.
 
